@@ -33,49 +33,28 @@ As a first step a new repository needs to be added to the root build.gradle:
  
 # Configuration
 
-Initialise the SDK in your application class and add the API_KEY from DevNagri. Classes inheriting from Application should overwrite attachBaseContext to enable translations outside of the activity context:
+Initialise the SDK in your application class and add the API_KEY from DevNagri. 
 
-
-    public class MainApplication extends Application {
-
-      @Override
-
-      public void onCreate() {
-
-          super.onCreate();
+    class MainApplication : Application {
+      override fun onCreate() {
           val strings = R.string::class.java.fields.map { it.name }
           val arrays = R.array::class.java.fields.map { it.name }
           val plurals = R.plurals::class.java.fields.map { it.name }
           DevNagriTranslationSdk.init(applicationContext, "API_KEY" , strings, arrays, plurals)
-
       }
-
-      @Override
-
-      protected void attachBaseContext(Context newBase) {
-
-        super.attachBaseContext(DevNagriTranslationSdk.wrapApplicationContext(newBase));
-
-      } 
-
-
     }
  
 
 Additionally, you need to inject the SDK in each activity, e.g. by creating a base activity which all other activities inherit from:
 
-    public class BaseActivity extends AppCompatActivity {
+    class BaseActivity : AppCompatActivity() 
+    {
+        override fun getDelegate(): AppCompatDelegate 
+        {
+           return DevNagriTranslationSdk.fetchAppDelegate(this, super.getDelegate())
+        }
+	}
 
-      @NonNull
-      @Override
-
-      public AppCompatDelegate getDelegate() {
-
-        return DevNagriTranslationSdk.fetchAppDelegate(this, super.getDelegate());
-
-      }
-
-    }
 
 
 # Change language
@@ -90,18 +69,16 @@ In case you don't want to use the system language, you can set a different langu
 # Get Supported languages
 
 You can get supported languages for the SDK using this method.
-This will return hashmap of language code and language name
+This will return hashmap of language name and language code
 
-    DevNagriTranslationSDK.getAllSupportableLanguages();
+   val supportedLangauges =  DevNagriTranslationSDK.getAllSupportableLanguages()
  
 
 # Translate String, List and Map on runtime
 
 You can use these methods anywhere in your project and these will provide translation for current active locale in callback method.
 
-
 # Get Translation of a Specific String.
-
 
     DevNagriTranslationSdk.getTranslationOfString("SampleText"){ translation ->
   	   // use translated text here       
@@ -111,7 +88,6 @@ You can use these methods anywhere in your project and these will provide transl
 # Get Translations of an Array of Strings.
 
     val arrayList = arrayListOf ("SampleText1","SampleText2","SampleText3")
-
     DevNagriTranslationSdk.getTranslationOfStrings(arrayList){ translations ->
   	   // use translated text here       
     }
@@ -120,7 +96,6 @@ You can use these methods anywhere in your project and these will provide transl
 # Get Translations Of HashMap 
 
     val map = hashMapOf (Pair("A","SampleText1"), Pair("B","SampleText2"), Pair("C","SampleText3") )
-
     DevNagriTranslationSdk.getTranslationOfMap(map){ translations ->
        // use translated map here
     }
@@ -135,5 +110,5 @@ Translations can be used as usual in layouts:
 
 And inside code:
 
-    TextView text = (TextView) findViewById(R.id.text_id);
-    text.setText(R.string.translation_key);
+    val text = findViewById(R.id.text_id) as TextView
+    text.setText(R.string.translation_key)
