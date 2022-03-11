@@ -21,7 +21,7 @@ As a first step a new repository needs to be added to the root build.gradle:
 
     dependencies {
 
-        implementation 'com.github.DevnagriAI:dota-sdk-android:1.0.0@aar' {   
+        implementation 'com.github.DevnagriAI:dota-sdk-android:1.0.1@aar' {   
               transitive(true)
         }
         
