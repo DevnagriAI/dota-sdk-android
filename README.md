@@ -57,7 +57,7 @@ Additionally, you need to inject the SDK in each activity, e.g. by creating a ba
 
 
 
-# Change language
+# Change Language
 
 In case you don't want to use the system language, you can set a different language in the updateAppLocale method. The language code (locale) needs to be present in a release from Devnagri.
 
@@ -66,12 +66,12 @@ In case you don't want to use the system language, you can set a different langu
     DevNagriTranslationSDK.updateAppLocale(context:this, locale:locale);
 
 
-# Get Supported languages
+# Get Supported Languages
 
 You can get supported languages for the SDK using this method.
 This will return hashmap of language name and language code
 
-   val supportedLangauges =  DevNagriTranslationSDK.getAllSupportableLanguages()
+	val supportedLangauges =  DevNagriTranslationSDK.getAllSupportableLanguages()
  
 
 # Translate String, List and Map on runtime
