@@ -30,7 +30,7 @@ As a first step a new repository needs to be added to the root build.gradle:
     }
  
 # Compatibility
- Please use Kotlin version 1.6.10 or above and Gradle JDK version 11. The SDK support only kotlin language.
+ Please use Kotlin version 1.6.10 or above and Gradle JDK version 11. The SDK support only kotlin language. Target should be 31 to use this SDK.
  
 # Configuration
 
