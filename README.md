@@ -1,5 +1,9 @@
 
 # SDK Integration Steps:
+# Introduction
+Devnagri Over the Air for Android lets you update translations in your Android app without having to release it every single time.
+
+By including our SDK, your app will check for updated translations in Devnagri regularly and download them in the background.
 
 # Include the SDK
 
@@ -41,6 +45,7 @@ Initialise the SDK in your application class and add the API_KEY from DevNagri.
           val strings = R.string::class.java.fields.map { it.name }
           val arrays = R.array::class.java.fields.map { it.name }
           val plurals = R.plurals::class.java.fields.map { it.name }
+	  // sending array and plurals are optional here
           DevNagriTranslationSdk.init(applicationContext, "API_KEY" , strings, arrays, plurals)
       }
     }
@@ -54,9 +59,10 @@ Additionally, you need to inject the SDK in each activity, e.g. by creating a ba
         {
            return DevNagriTranslationSdk.fetchAppDelegate(this, super.getDelegate())
         }
-	}
+    }
 
-
+# Default Localisation Override
+   The SDK override the functionality of @string and getString by default. 
 
 # Change Language
 
@@ -66,6 +72,7 @@ In case you don't want to use the system language, you can set a different langu
     val locale = Locale("hi");
     DevNagriTranslationSDK.updateAppLocale(context:this, locale:locale);
 
+Please note that you will get the english text back if your device language is english or you have not set any specific language for the SDK. To get the translation in Hindi, Please update app locale to Hindi as per above method.
 
 # Get Supported Languages
 
