@@ -1,4 +1,3 @@
-
 # SDK Integration Steps:
 # Introduction
 Devnagri Over the Air for Android lets you update translations in your Android app without having to release it every single time.
@@ -6,10 +5,7 @@ Devnagri Over the Air for Android lets you update translations in your Android a
 By including our SDK, your app will check for updated translations in Devnagri regularly and download them in the background.
 
 # Include the SDK
-
-As a first step a new repository needs to be added to the root build.gradle:
-
-    allprojects {
+As a first step a new maven repository needs to be added to your default dependency resolution file set by your project, it can be either your project build.gradle file or settings.gradle file:
 
         repositories {
 
@@ -17,35 +13,40 @@ As a first step a new repository needs to be added to the root build.gradle:
 
             maven { url 'https://jitpack.io' }
 
-
         }
+	
 
-    }
+Add the below dependency in your app build.gradle file:
 
-
-    dependencies {
-
-        implementation ('com.github.DevnagriAI:dota-sdk-android:1.0.2@aar') {   
-              transitive(true)
-        }
+	dependencies {
+	
+	    ...
+	    
+	    implementation ('com.github.DevnagriAI:dota-sdk-android:1.0.3@aar') { transitive(true) }
+	    
+	}
         
-        ...
+       
 
-    }
  
 # Compatibility
- Please use Kotlin version 1.6.10 or above and Gradle JDK version 11. The SDK support only kotlin language. Target should be 31 to use this SDK.
+ Use Kotlin version 1.4.30 or above and Gradle JDK version 11. This SDK support only kotlin language. Target/Compile SDK should be 31.
  
 # Configuration
 
 Initialise the SDK in your application class and add the API_KEY from DevNagri. 
 
-    class MainApplication : Application {
+    class MainApplication : Application() {
+    
       override fun onCreate() {
+          super.onCreate()
+	  
           val strings = R.string::class.java.fields.map { it.name }
           val arrays = R.array::class.java.fields.map { it.name }
           val plurals = R.plurals::class.java.fields.map { it.name }
-	  // sending array and plurals are optional here
+	  
+	  // passing arrays and plurals in init method is optional here, pass them only if defined in strings.xml file
+	  
           DevNagriTranslationSdk.init(applicationContext, "API_KEY" , strings, arrays, plurals)
       }
     }
@@ -70,7 +71,7 @@ In case you don't want to use the system language, you can set a different langu
 
 
     val locale = Locale("hi");
-    DevNagriTranslationSDK.updateAppLocale(context:this, locale:locale);
+    DevNagriTranslationSDK.updateAppLocale(activityContext , locale);
 
 Please note that you will get the english text back if your device language is english or you have not set any specific language for the SDK. To get the translation in Hindi, Please update app locale to Hindi as per above method.
 
@@ -120,3 +121,4 @@ And inside code:
 
     val text = findViewById(R.id.text_id) as TextView
     text.setText(R.string.translation_key)
+
