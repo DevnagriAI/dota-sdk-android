@@ -8,9 +8,10 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.DevnagriAI</groupId>
   <artifactId>dota-sdk-android</artifactId>
-  <version>1.0.3</version>
+  <version>1.0.4</version>
  <!-- <packaging>aar</packaging>-->
   <dependencies>
+     <dependency>
       <groupId>com.google.android.material</groupId>
       <artifactId>material</artifactId>
       <version>1.3.0</version>
