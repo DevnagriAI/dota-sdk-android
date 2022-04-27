@@ -22,7 +22,7 @@ Add the below dependency in your app build.gradle file:
 	
 	    ...
 	    
-	    implementation ('com.github.DevnagriAI:dota-sdk-android:1.0.7@aar') { transitive(true) }
+	    implementation ('com.github.DevnagriAI:dota-sdk-android:1.0.8@aar') { transitive(true) }
 	    
 	}
         
@@ -40,14 +40,16 @@ Initialise the SDK in your application class and add the API_KEY from DevNagri.
     
       override fun onCreate() {
           super.onCreate()
-	  
+            
+          val syncTime:Int = 10  //In minutes
+          
           val strings = R.string::class.java.fields.map { it.name }
           val arrays = R.array::class.java.fields.map { it.name }
           val plurals = R.plurals::class.java.fields.map { it.name }
 	  
-	  // passing arrays and plurals in init method is optional here, pass them only if defined in strings.xml file
+	      // passing arrays and plurals in init method is optional here, pass them only if defined in strings.xml file
 	  
-          DevNagriTranslationSdk.init(applicationContext, "API_KEY" , strings, arrays, plurals)
+          DevNagriTranslationSdk.init(applicationContext, "API_KEY" ,syncTime, strings, arrays, plurals)
       }
     }
  
