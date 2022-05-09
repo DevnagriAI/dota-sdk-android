@@ -13,7 +13,7 @@ class BaseApplication : Application() {
         val arrays=R.array::class.java.fields.map { it.name }
 
 
-        val API_KEY="devnagri_9b3a4902cd4111ecbb6002bf838402f8"
+        val API_KEY="devnagri_eb93ac18b65d11ecb762021b05a03360"
         DevNagriTranslationSdk.init(applicationContext,API_KEY,strings,arrays)
 
 

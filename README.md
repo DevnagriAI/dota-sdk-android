@@ -22,7 +22,7 @@ Add the below dependency in your app build.gradle file:
 	
 	    ...
 	    
-	    implementation ('com.github.DevnagriAI:dota-sdk-android:2.0@aar') { transitive(true) }
+	    implementation ('com.github.DevnagriAI:dota-sdk-android:1.0.9@aar') { transitive(true) }
 	    
 	}
         

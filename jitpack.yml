@@ -1,6 +1,6 @@
 install: 
   - FILE="-Dfile=dota-sdk-android.aar" 
-  - mvn install:install-file $FILE -DgroupId=com.github.DevnagriAI -DartifactId=dota-sdk-android -Dversion=2.0 -Dpackaging=aar -DpomFile=pom.xml
+  - mvn install:install-file $FILE -DgroupId=com.github.DevnagriAI -DartifactId=dota-sdk-android -Dversion=1.0.9 -Dpackaging=aar -DpomFile=pom.xml
 jdk:
   - openjdk11
 before_install:
