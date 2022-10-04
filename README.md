@@ -76,6 +76,9 @@ In case you don't want to use the system language, you can set a different langu
     DevNagriTranslationSDK.updateAppLocale(activityContext , locale);
 
 Please note that you will get the english text back if your device language is english or you have not set any specific language for the SDK. To get the translation in Hindi, Please update app locale to Hindi as per above method.
+Also even after you do not see the text in selected language then please reload your ui controls to get the changes or recreate the activity to force the changes.
+i.e. You can update the data for recycler view by notifyDataSetChanged method.
+Also, you should use runOnUiThread for reloading your views in case you see any lag there.
 
 # Get Supported Languages
 
@@ -123,4 +126,5 @@ And inside code:
 
     val text = findViewById(R.id.text_id) as TextView
     text.setText(R.string.translation_key)
+
 
